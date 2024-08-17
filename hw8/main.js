@@ -62,7 +62,7 @@ function showMenu() {
                   </span>
                 </div>
               </div>
-              <div class="total-price-menu" id="total-price-menu-${product.id}" data-id="${product.id}">0 تومان</div>
+              <div class="total-price-menu" id="total-price-menu-${product.id}">0 تومان</div>
             </div>
     `;
     menuItems.append(menuCard);
@@ -75,20 +75,16 @@ const ordersPrice = document.getElementById("total-orders-price");
 const addFood = document.querySelectorAll(".add-food");
 const removeFood = document.querySelectorAll(".remove-food");
 
-window.onload = function() {
+window.onload = function () {
   getFromLocalStorage();
 };
 
 menuItems.addEventListener("click", (e) => {
   if (e.target.classList.contains("fa-plus")) {
-    const productId = parseInt(
-      e.target.closest(".add-food").getAttribute("data-id")
-    );
+    const productId = parseInt(e.target.closest(".add-food").dataset.id);
     addToCard(productId);
   } else if (e.target.classList.contains("fa-minus")) {
-    const productId = parseInt(
-      e.target.closest(".remove-food").getAttribute("data-id")
-    );
+    const productId = parseInt(e.target.closest(".remove-food").dataset.id);
     removeFromCart(productId);
   }
 });
@@ -231,12 +227,16 @@ submit.addEventListener("click", showModal);
 
 function closeModal() {
   modal.style.display = "none";
+  removeAfterModal();
+  localStorage.removeItem("orders");
+  // localStorage.clear();
 }
 submitBtn.addEventListener("click", closeModal);
 
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    removeAfterModal();
   }
 };
 
@@ -257,4 +257,27 @@ function getFromLocalStorage() {
     updateCount(order.id);
     updateOrderPriceMenu(order.id);
   });
+}
+
+function removeAfterModal() {
+  const orderPriceMenu = document.querySelectorAll(".total-price-menu");
+  orderPriceMenu.forEach((order) => {
+    order.innerText = "0 تومان";
+  });
+  const orderCount = document.querySelectorAll(".count");
+  orderCount.forEach((order) => {
+    order.innerText = "0";
+  });
+  const orderPrice = document.getElementById("total-orders-price");
+  orderPrice.innerText = "0 تومان";
+  const fee = document.getElementById("fee-price");
+  fee.innerText = "0 تومان";
+
+  const discountPercent = document.getElementById("discountPercent");
+  discountPercent.innerText = "0 درصد";
+  let totalPriceCard = document.getElementById("total-price-payment");
+  totalPriceCard.innerText = "0 تومان";
+  const discountInput = document.getElementById("discount-input");
+  discountInput.value = "";
+  orders = [];
 }
