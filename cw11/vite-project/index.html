@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div id="Todos" class="p-6">
+      <h1 class="text-4xl font-bold my-4 text-center">Todo list</h1>
+      <div class="flex justify-center mt-9">
+        <input
+          id="todoInput"
+          type="text"
+          placeholder="Enter todo..."
+          class="outline-none"
+        />
+        <button id="addTodo" type="submit">add</button>
+      </div>
+      <div
+        id="todo-list"
+        class="flex flex-col items-center justify-between p-2 py-8 gap-4"
+      ></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="./src/functions/createTodo.ts"></script>
+    <script type="module" src="./src/functions/updateDeleteTodo.ts"></script>
+  </body>
+</html>
