@@ -19,7 +19,7 @@ const TodoForm: React.FC<ITodos> = () => {
   return (
     <form
       onSubmit={handleSubmit(handleSubmitForm)}
-      className="w-96 rounded-lg shadow-md p-3 space-y-5 flex flex-col"
+      className="w-96 rounded-lg shadow-md p-4 space-y-4 flex flex-col bg-gray-50 mb-10"
     >
       <Controller
         name="todo"
@@ -27,7 +27,7 @@ const TodoForm: React.FC<ITodos> = () => {
         render={({ field }) => <InputForm label="title" {...field} />}
       />
       <button
-        className="bg-blue-400 rounded py-1.5 font-medium text-white"
+        className="bg-blue-400 rounded py-1.5 text-white"
         type="submit"
       >
         submit

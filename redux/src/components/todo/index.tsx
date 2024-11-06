@@ -14,7 +14,7 @@ const Todo: React.FC = () => {
         return (
           <div
             key={el.id}
-            className="flex gap-12 justify-between items-center shadow p-4 w-96 mt-10"
+            className="flex gap-4 justify-between items-center shadow-md p-4 w-96 mt-5 bg-gray-50 rounded"
           >
             <span>{el.todo}</span>
             <button
