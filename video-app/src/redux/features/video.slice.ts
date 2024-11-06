@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IForm } from "../../types/video.type";
 
-// Define a type for the slice state
 export interface videoState {
   list: IForm[];
+  isSorted: boolean;
 }
 
-// Define the initial state using that type
 const initialState: videoState = {
   list: [],
+  isSorted: false,
 };
 
 export const videoSlice = createSlice({
   name: "video",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     addVideo: (state, action: PayloadAction<IForm>) => {
@@ -23,12 +22,15 @@ export const videoSlice = createSlice({
       state.list = state.list.filter((el) => el.id !== action.payload);
     },
     sortTable: (state, action: PayloadAction<keyof IForm>) => {
+      state.isSorted = !state.isSorted;
       const key = action.payload;
+
       state.list.sort((a, b) => {
-        if (typeof a[key] === "string" && typeof b[key] === "string") {
-          return a[key].localeCompare(b[key]);
+        if (state.isSorted) {
+          return a[key] > b[key] ? 1 : -1;
+        } else {
+          return a[key] < b[key] ? 1 : -1;
         }
-        return Number(a[key]) - Number(b[key]);
       });
     },
   },
