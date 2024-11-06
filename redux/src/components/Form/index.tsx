@@ -4,7 +4,6 @@ import InputForm from "./input-form";
 import { todoActions } from "../../redux/features/todoSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { ITodos } from "../../types/todo.type";
-let idCounter = 1;
 
 const TodoForm: React.FC<ITodos> = () => {
   const { handleSubmit, control } = useForm<ITodos>();
@@ -12,7 +11,7 @@ const TodoForm: React.FC<ITodos> = () => {
 
   const handleSubmitForm: SubmitHandler<ITodos> = (data) => {
     console.log(data);
-    const uniqueTodo = { ...data, id: (idCounter += 1) };
+    const uniqueTodo = { ...data, id: Date.now() };
     dispatch(todoActions.addTodo(uniqueTodo));
   };
 
@@ -26,10 +25,7 @@ const TodoForm: React.FC<ITodos> = () => {
         control={control}
         render={({ field }) => <InputForm label="title" {...field} />}
       />
-      <button
-        className="bg-blue-400 rounded py-1.5 text-white"
-        type="submit"
-      >
+      <button className="bg-blue-400 rounded py-1.5 text-white" type="submit">
         submit
       </button>
     </form>

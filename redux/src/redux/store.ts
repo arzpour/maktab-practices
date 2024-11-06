@@ -5,6 +5,7 @@ import {} from "redux-persist";
 import storage from "redux-persist/es/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
+import logger from "redux-logger";
 
 const persistConfig = {
   key: "root",
@@ -18,7 +19,7 @@ export const store = configureStore({
     todo: persist,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(todoMiddleware, crashReporter),
+    getDefaultMiddleware().concat(todoMiddleware, crashReporter, logger),
 });
 
 export const persistor = persistStore(store);
