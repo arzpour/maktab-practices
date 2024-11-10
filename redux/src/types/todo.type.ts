@@ -4,3 +4,10 @@ export interface ITodos {
   completed?: boolean;
   userId?: number;
 }
+
+export interface ITodoList {
+  limit?: number;
+  skip?: number;
+  total?: number;
+  todos?: ITodos[];
+}
